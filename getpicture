@@ -9,9 +9,9 @@ api = tweepy.API(auth,wait_on_rate_limit=True )
 
 
 #get the picture from twitter
-tweets = api.user_timeline(screen_name='Michael_Li510' , count=6, include_rts=False,exclude_replies=True)
+tweets = api.user_timeline(screen_name='Username' , count=20, include_rts=False,exclude_replies=True)
 last_id = tweets[-1].id
-more_tweets = api.user_timeline(screen_name='Michael_Li510', count=100 ,include_rts=False,exclude_replies=True, max_id=last_id - 1)
+more_tweets = api.user_timeline(screen_name='Username', count=20 ,include_rts=False,exclude_replies=True, max_id=last_id - 1)
 tweets = tweets + more_tweets
 
 i=1
@@ -26,3 +26,16 @@ for p in photos:
     #rename the photo
     os.renames(pic,str(i)+'.jpg')
     i += 1
+
+lenth = len(photos)
+thisdir = os.getcwd()
+
+#normalize the size of the picture
+print(lenth)
+def convertjpg(newpic,thisdir,width=1200,height=1200):
+    img=Image.open(newpic)
+    new_img=img.resize((width,height),Image.BILINEAR)
+    new_img.save(os.path.join(thisdir,os.path.basename(newpic)))
+j = 1
+for j in range(len(pic)):
+    convertjpg(str(j)+'.jpg',thisdir)
