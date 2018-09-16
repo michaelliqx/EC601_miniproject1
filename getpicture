@@ -37,5 +37,5 @@ def convertjpg(newpic,thisdir,width=1200,height=1200):
     new_img=img.resize((width,height),Image.BILINEAR)
     new_img.save(os.path.join(thisdir,os.path.basename(newpic)))
 j = 1
-for j in range(len(pic)):
+for j in range(lenth):
     convertjpg(str(j)+'.jpg',thisdir)
