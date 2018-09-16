@@ -1,3 +1,3 @@
-os.chdir('C:/Users/lliqx/PycharmProjects/untitled2/ffmpeg/bin ')
-cmd ='ffmpeg -framerate .5 -f image2 -i C:/users/lliqx/pycharmprojects/untitled2/%d.jpg  test2.mp4 '
+os.chdir('Save_dir ')
+cmd ='ffmpeg -framerate .5 -f image2 -i pic_dir  Videoname.mp4 '
 os.system(cmd)
