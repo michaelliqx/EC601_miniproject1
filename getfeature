@@ -3,7 +3,7 @@ def detect_labels(path):
     """Detects labels in the file."""
     client = vision.ImageAnnotatorClient()
     for i in range(len(photos)):
-        Path = path+ str(i) +'.jpg'
+        Path = path+ str(i+1) +'.jpg'
         with io.open(Path, 'rb') as image_file:
             content = image_file.read()
         num = 1
@@ -12,6 +12,9 @@ def detect_labels(path):
         labels = response.label_annotations
         print('Labels:')
         for label in labels:
-            print('The label-%d of %d.jpg is:'%(num,i))
-            print(label.description)
-            num += 1
+            while (num < 3):
+                print('The label %d of %d.jpg is:'%(num,i))
+                print(label.description)
+                num += 1
+            else:
+                break
