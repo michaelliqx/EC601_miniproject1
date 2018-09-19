@@ -11,5 +11,5 @@ Second Part:
 In this part, I have used the os.system() in the os module. It can execute a terminal command in python. And in the command, I used ffmpeg to transfer. what I need to do is to set the parameter of the video and the picture it need.
 
 Third Part:
-In this part, I need to use the Google Cloud Vision to detect the labels of my picture.It required me to import the google.cloud module to use it. What I set here was to detect the top 3 labels for each picture, which means it's the most related to the pictures' label in Google's data.
+In this part, I need to use the Google Cloud Vision to detect the labels of my picture.It required me to import the google.cloud module to use it. What I set here was to detect the top 3 labels for each picture, which means it's the most related to the pictures' label in Google's data.To be honest, the code of this part, you can find on the official website of Google Cloud Vision and you can use it and change it into what you want it be. The Google supplied the functions,codes and API for users and we just need to know how to use it.  
 
