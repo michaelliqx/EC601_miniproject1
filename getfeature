@@ -1,4 +1,7 @@
 #get the labels
+
+#this is the code you could find in Google Cloud Vision's official website, what I have done was to change the path and import my pictures to this function, and choose how many labels for each picture I want to print.
+
 def detect_labels(path):
     client = vision.ImageAnnotatorClient()
     i = 1
