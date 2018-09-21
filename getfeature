@@ -1,19 +1,23 @@
 #get the labels
 
 #this is the code you could find in Google Cloud Vision's official website, what I have done was to change the path and import my pictures to this function, and choose how many labels for each picture I want to print.
-
 def detect_labels(path):
     client = vision.ImageAnnotatorClient()
-    i = 1
-    for i in range(len(photos)):
-        Path = path+ str(i+1) +'.jpg'
-        with io.open(Path, 'rb') as image_file:
-            content = image_file.read()
-        num = 1
-        image = vision.types.Image(content=content)
-        response = client.label_detection(image=image)
-        labels = response.label_annotations[0:3]
-        print('Labels:')
-        for label in labels:
-            print('The label %d of %d.jpg is %s:'%(num,i,label.description))
-            num += 1
+        t = 0
+        for i in range(len(photos)):
+            Path = path+str(i+1) +'.jpg'
+            with io.open(Path, 'rb') as image_file:
+                content = image_file.read()
+            image = vision.types.Image(content=content)
+            response = client.label_detection(image=image)
+            labels = response.label_annotations[0:3]
+            #print('Labels:')
+            f = open('label.srt', 'a')
+            f.write(str(t+1)+'\n')
+            f.write('00:00:'+str(t)+'.000 --> 00:00:'+str((t+1))+'.000'+'\n')
+            for label in labels:
+                #print('The label %d of %d.jpg is %s:'%(num,i,label.description))
+                f.write(label.description+'\n')
+            f.write('\n')
+            f.close()
+            t += 1
