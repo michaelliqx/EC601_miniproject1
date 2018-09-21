@@ -1,3 +1,8 @@
-os.chdir('Save_dir ')
-cmd ='ffmpeg -framerate .5 -f image2 -i pic_dir  Videoname.mp4 '
-os.system(cmd)
+def video():
+    os.chdir('C:/Users/lliqx/PycharmProjects/untitled2/ ')
+    cmd1 ='ffmpeg -framerate .91 -f image2 -i C:/users/lliqx/pycharmprojects/untitled2/%d.jpg  label.mp4 '
+    os.system(cmd1)
+    #cmd2 = 'ffmpeg -i C:/Users/lliqx/PycharmProjects/untitled2/label.srt C:/Users/lliqx/PycharmProjects/untitled2/label.ass'
+    cmd3 = 'ffmpeg -i label.mp4 -vf subtitles=label.srt label.mkv'
+    #os.system(cmd2)
+    os.system(cmd3)
