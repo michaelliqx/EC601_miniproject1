@@ -29,6 +29,9 @@
 1.create_mongodb():connect to local mongoDB and create a database "lqx"
 2.if_database(): to make sure the database exist.
 3.create_col(): to create a collection
-4.
+4.if_col(): to make sure if the collection exist
+5.mongodb_insert(): to insert the data into the database. the data inputed was the same as inputed into mysql.
+6.mongodb_search_all():to search the data in database with specific keywords.
+7.delete_statistic():to delete the data in database.
 
 ### to be continued...
