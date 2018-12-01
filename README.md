@@ -20,18 +20,18 @@
 - here is the introduce of functions about database in my program:
 
 ### MySQL:
-1. connectdb(): to connect a database whose username is "lqx", password:"1234567" based on the database:"lqx" on port "3306".
-2.createtable(): to create a table to store the data in from the python program, which contains as follows: a sequencial id number for each picture, the tweet user's name, the 3 highest label of the picuture, if no enough label, it will be none.
-3.insertdb(): to insert the data into the table.
-4.printdb(): to print the data stored in database of specific keyword. the keyword could be selected by any user.
+- 1. connectdb(): to connect a database whose username is "lqx", password:"1234567" based on the database:"lqx" on port "3306".
+- 2.createtable(): to create a table to store the data in from the python program, which contains as follows: a sequencial id number for each picture, the tweet user's name, the 3 highest label of the picuture, if no enough label, it will be none.
+- 3.insertdb(): to insert the data into the table.
+- 4.printdb(): to print the data stored in database of specific keyword. the keyword could be selected by any user.
 
 ### MongoDB:
-1.create_mongodb():connect to local mongoDB and create a database "lqx"
-2.if_database(): to make sure the database exist.
-3.create_col(): to create a collection
-4.if_col(): to make sure if the collection exist
-5.mongodb_insert(): to insert the data into the database. the data inputed was the same as inputed into mysql.
-6.mongodb_search_all():to search the data in database with specific keywords.
-7.delete_statistic():to delete the data in database.
+- 1.create_mongodb():connect to local mongoDB and create a database "lqx"
+- 2.if_database(): to make sure the database exist.
+- 3.create_col(): to create a collection
+- 4.if_col(): to make sure if the collection exist
+- 5.mongodb_insert(): to insert the data into the database. the data inputed was the same as inputed into mysql.
+- 6.mongodb_search_all():to search the data in database with specific keywords.
+- 7.delete_statistic():to delete the data in database.
 
 ### to be continued...
