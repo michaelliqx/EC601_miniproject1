@@ -1,4 +1,4 @@
-# EC601_miniproject1
+# EC601_miniproject1 & miniproject3
 ## I divide the project into three parts.
 #### 1.download the tweet and it's picture
 #### 2.turn the picture into a video
@@ -18,7 +18,17 @@
 - I used the mysql and mongoDB to upload the label and the tweeter user's information into the database. you could search the data in database by importing my .py file.
 
 - here is the introduce of functions about database in my program:
-...
-...
-...
+
+### MySQL:
+1. connectdb(): to connect a database whose username is "lqx", password:"1234567" based on the database:"lqx" on port "3306".
+2.createtable(): to create a table to store the data in from the python program, which contains as follows: a sequencial id number for each picture, the tweet user's name, the 3 highest label of the picuture, if no enough label, it will be none.
+3.insertdb(): to insert the data into the table.
+4.printdb(): to print the data stored in database of specific keyword. the keyword could be selected by any user.
+
+### MongoDB:
+1.create_mongodb():connect to local mongoDB and create a database "lqx"
+2.if_database(): to make sure the database exist.
+3.create_col(): to create a collection
+4.
+
 ### to be continued...
