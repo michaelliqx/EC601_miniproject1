@@ -56,32 +56,31 @@ def printdb(db,keywords):
 
 # mongoDB
 #############################################
-def create_mongodb():
+def create_mongodb(name_db):
     myclient = pymongo.MongoClient("mongodb://localhost:27017/")
-    mydb = myclient['lqx']
+    mydb = myclient[name_db]
+    return mydb
 
-
-def if_database():
+def if_database(name):
     myclient = pymongo.MongoClient("mongodb://localhost:27017/")
     dblist = myclient.list_database_names()
-    if "lqx" in dblist:
-        print("database lqx exist!")
+    if name in dblist:
+        print("database %s exist!"%(name))
 
-def create_col():
+def create_col(mydb,name_db,name_col):
     myclient = pymongo.MongoClient("mongodb://localhost:27017/")
-    mydb = myclient['lqx']
-    mycol = mydb["sites"]
+    # mydb = myclient[name_db]
+    mycol = mydb[name_col]
+    return mycol
 
-def if_col():
+def if_col(name_db,name_col):
     myclient = pymongo.MongoClient('mongodb://localhost:27017/')
-    mydb = myclient['lqx']
+    mydb = myclient[name_db]
     collist = mydb.list_collection_names()
-    if "sites" in collist:
-        print("col sites exist")
+    if name_col in collist:
+        print("col %s exist"%(name_col))
 
-def mongodb_insert(id,tweeter,label1,label2=None,label3=None):
-    usr = 'lqx'
-    col = 'sites'
+def mongodb_insert(usr,col,id,tweeter,label1,label2=None,label3=None):
     myclient = pymongo.MongoClient("mongodb://localhost:27017/")
     mydb = myclient[usr]
     mycol = mydb[col]
@@ -100,18 +99,12 @@ def mongodb_insert(id,tweeter,label1,label2=None,label3=None):
     # # 输出插入的所有文档对应的 _id 值
     # print(x.inserted_ids)
 
-def mongodb_search_one():
-    myclient = pymongo.MongoClient("mongodb://localhost:27017/")
-    mydb = myclient["lqx"]
-    mycol = mydb["sites"]
-    x = mycol.find_one()
-    print(x)
 
-def mongodb_search_all(keywords):
+def mongodb_search_all(name_db,name_col,keywords):
     myclient = pymongo.MongoClient("mongodb://localhost:27017/")
-    mydb = myclient["lqx"]
-    mycol = mydb["sites"]
-    #for x in mycol.find():
+    mydb = myclient[name_db]
+    mycol = mydb[name_col]
+
     for x in mycol.find({'label1':keywords}):
         print(x)
     for x in mycol.find({'label2': keywords}):
@@ -120,10 +113,10 @@ def mongodb_search_all(keywords):
         print(x)
 
 
-def delete_statistic():
+def delete_statistic(name_db,name_col):
     myclient = pymongo.MongoClient("mongodb://localhost:27017/")
-    mydb = myclient["lqx"]
-    mycol = mydb["sites"]
+    mydb = myclient[name_db]
+    mycol = mydb[name_col]
     # myquery = {"name": "Taobao"}#example
     # mycol.delete_one(myquery)
     # # 删除后输出
@@ -198,7 +191,7 @@ def video(path):
     os.system(cmd3)
 
 #get the labels
-def detect_labels(path,tweeter):
+def detect_labels(name_mongo,name_col,path,tweeter):
     """Detects labels in the file."""
     client = vision.ImageAnnotatorClient()
     t = 0
@@ -218,8 +211,9 @@ def detect_labels(path,tweeter):
         else:
             label2 = labels[1].description
             label3 = labels[2].description
+
         insertdb(db,i,tweeter,labels[0].description, label2, label3)
-        mongodb_insert(i,tweeter,labels[0].description, label2,label3)
+        mongodb_insert(name_mongo,name_col,i,tweeter,labels[0].description, label2,label3)
 
         f = open('C:/users/lliqx/pycharmprojects/untitled2/ffmpeg/bin/label.srt', 'a')
         f.write(str(t+1)+'\n')
@@ -230,10 +224,10 @@ def detect_labels(path,tweeter):
         f.close()
         t += 1
 
-def functions():
+def functions(name_mongo,name_col):
     keywords = input("please input the keywords you wanna search:")
     try:
-        mongodb_search_all(keywords)
+        mongodb_search_all(name_mongo,name_col,keywords)
         printdb(db,keywords)
     except:
         print("no such keywords!")
@@ -250,11 +244,15 @@ if __name__ == '__main__':
 
     db = connectdb()
     createtable(db)
+    name_mongo = input("the name of the database of mongodb:")
+    name_col = input("the name of the collction of %s:"%(name_mongo))
+    mongo_db = create_mongodb(name_mongo)
+    mongo_col = create_col(mongo_db, name_mongo, name_col)
     path = os.getcwd()
-    detect_labels(path,tweeter)
+    detect_labels(name_mongo,name_col,path,tweeter)
     #video(path)
 
-    functions()
+    functions(name_mongo,name_col)
     dele = input("do you want to delete the data in mongoDB?(y/n):")
     if dele == 'y':
-        delete_statistic()
+        delete_statistic(name_mongo,name_col)
